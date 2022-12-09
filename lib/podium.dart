@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:leaderboard/utils/lighten_color.dart';
 
 import 'package:leaderboard/utils/podium_position.dart';
 import 'package:leaderboard/utils/surface_clipper.dart';
@@ -35,7 +36,7 @@ class Podium extends StatelessWidget {
         Container(
           height: height,
           width: width,
-          color: color,
+          color: isFirstPosition ? lighten(color, .05) : color,
           child: Padding(
             padding: EdgeInsets.only(
               top: 10.0,
@@ -58,14 +59,7 @@ class Podium extends StatelessWidget {
     );
   }
 
+  bool get isFirstPosition => position == Position.first;
   bool get isSecondPosition => position == Position.second;
   bool get isThirdPosition => position == Position.third;
-
-  Color lighten(Color color, [double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
-    final hsl = HSLColor.fromColor(color);
-    final hslLight =
-        hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
-    return hslLight.toColor();
-  }
 }
