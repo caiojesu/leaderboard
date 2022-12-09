@@ -36,7 +36,30 @@ class Podium extends StatelessWidget {
         Container(
           height: height,
           width: width,
-          color: isFirstPosition ? lighten(color, .05) : color,
+          decoration: BoxDecoration(
+            color: color,
+            gradient: isFirstPosition
+                ? LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    stops: const [0.1, 0.7],
+                    colors: [
+                      color,
+                      lighten(color, 0.06),
+                    ],
+                  )
+                : null,
+            boxShadow: isFirstPosition
+                ? [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.2),
+                      spreadRadius: 2,
+                      blurRadius: 10,
+                      offset: const Offset(0, 2),
+                    ),
+                  ]
+                : null,
+          ),
           child: Padding(
             padding: EdgeInsets.only(
               top: 10.0,
